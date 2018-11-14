@@ -1,0 +1,70 @@
+<--navbar-->
+div.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+div.navpad{padding: 50px 50px 50px 50px;width:100%;
+   margin:0 auto;}
+
+.topnav a{
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: navy;
+  color: white;
+}
+
+.topnav a.active {
+  background-color: indianred;
+  color: white;
+}
+
+body{
+  color: #666666;
+  background-color: #f9f8f6;
+  font-family: Georgia, Times, serif;
+  margin: 10px;
+}
+header{
+  height:160px;
+  background-color: #f9f8f6;
+}
+.wrapper{
+  padding:20px;
+  text-align: center;
+  background-color: #fffff;
+}
+.parallax{
+  /*find image*/
+  min-height:500px;
+  /*create parallax scrolling effect*/
+  background-attachment:fixed;
+  background-position:center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.wrapper{
+  padding:20px;
+  text-align: center;
+  background-color: #ffffff;
+}
+#container{
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items:center;
+  height: 300px;
+  border: 1px solid black;
+}
+.box{
+  text-align:center;
+  width: 500px;
+  margin: 5px;
+}
