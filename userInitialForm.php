@@ -8,10 +8,10 @@
   <body>
     <?
     //Connection Constants
-    define('DB_name', 'cs361_dunnbrit');
-    define('DB_user', 'cs361_dunnbrit');
-    define('DB_password', '1967');
-    define('DB_host', 'classmysql.engr.oregonstate.edu');
+    define('DB_name', 'name');
+    define('DB_user', 'user');
+    define('DB_password', 'password');
+    define('DB_host', 'host');
 
     //Connect
     $link = mysql_connect(DB_host,DB_user,DB_password,DB_name);
@@ -158,4 +158,4 @@
 
   </body>
 </html>
-organizationSignIn.php
+ class="current"organizationSignIn.php

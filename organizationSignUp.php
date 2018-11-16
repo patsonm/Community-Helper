@@ -8,10 +8,10 @@
   <body>
     <?
     //Connection Constants
-    define('DB_name', 'cs361_dunnbrit');
-    define('DB_user', 'cs361_dunnbrit');
-    define('DB_password', '1967');
-    define('DB_host', 'classmysql.engr.oregonstate.edu');
+    define('DB_name', 'name');
+    define('DB_user', 'user');
+    define('DB_password', 'password');
+    define('DB_host', 'host');
 
     //Connect
     $link = mysql_connect(DB_host,DB_user,DB_password,DB_name);
@@ -27,7 +27,7 @@
 
     <div class="wrapper">
       <header>
-        <img src="images/logo.jpg"/>
+        <img src="logo.jpg"/>
         <nav>
           <ul>
             <li><a href="landingPage.php">Home</a></li>
