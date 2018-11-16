@@ -1,49 +1,175 @@
-<html>
-    <title> Information</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Navbar (sticky bottom) -->
-    <head>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<link rel="stylesheet" href="styles.css">
-        </head>
-    <style>
-body,h1,h2{font-family: "Raleway", sans-serif}
-body, html {height: 100%}
-p {line-height: 1.5}
+<!DOCTYPE html >
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <title>Charity Locator</title>
+  <style>
 
-</style>
-    <body>
-
-
-       <div id="googleMap" style="width:50%;height:300px;"></div>
-
-
-
-<script>
-
-function myMap() {
-var myLatLng = {lat: 37.4419, lng: -122.1419};
-var mapProp= {
-    center:new google.maps.LatLng(37.4419,-122.1419),
-    zoom:13,
-};
-
-var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-
-var marker = new google.maps.Marker({
-    position: myLatLng,
-    map: map,
-  });
+    #map {
+      height: 100%;
+    }
+/*map is whole page
+      edit size here*/
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+ </style>
+  </head>
 
 
-};
+  <body style="margin:0px; padding:0px;" onload="initMap()">
+    <div>
+         <label for="raddressInput">Search location:</label>
+         <input type="text" id="addressInput" size="15"/>
+        <label for="radiusSelect">Radius:</label>
+        <select id="radiusSelect" label="Radius">
+          <option value="32" selected>20 miles</option>
+          <option value="24">15 miles</option>
+          <option value="16">10 miles</option>
+          <option value="8">5 miles</option>
+        </select>
+
+        <input type="button" id="searchButton" value="Search"/>
+    </div>
+    <div><select id="locationSelect" style="width: 10%; visibility: hidden"></select></div>
+    <div id="map" style="width: 100%; height: 90%"></div>
+    <script>
+      var map;
+      var markers = [];
+      var infoWindow;
+      var locationSelect;
+
+        function initMap() {
+          var seattle = {lat: 47.607055, lng: -122.329033};
+          map = new google.maps.Map(document.getElementById('map'), {
+            center: seattle,
+            zoom: 11,
+            mapTypeId: 'roadmap',
+            mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU}
+          });
+          infoWindow = new google.maps.InfoWindow();
+
+          searchButton = document.getElementById("searchButton").onclick = searchLocations;
+
+          locationSelect = document.getElementById("locationSelect");
+          locationSelect.onchange = function() {
+            var markerNum = locationSelect.options[locationSelect.selectedIndex].value;
+            if (markerNum != "none"){
+              google.maps.event.trigger(markers[markerNum], 'click');
+            }
+          };
+        }
+
+       function searchLocations() {
+         var address = document.getElementById("addressInput").value;
+         var geocoder = new google.maps.Geocoder();
+         geocoder.geocode({address: address}, function(results, status) {
+           if (status == google.maps.GeocoderStatus.OK) {
+            searchLocationsNear(results[0].geometry.location);
+           } else {
+             alert(address + ' not found');
+           }
+         });
+       }
+
+       function clearLocations() {
+         infoWindow.close();
+         for (var i = 0; i < markers.length; i++) {
+           markers[i].setMap(null);
+         }
+         markers.length = 0;
+
+         locationSelect.innerHTML = "";
+         var option = document.createElement("option");
+         option.value = "none";
+         option.innerHTML = "See all results:";
+         locationSelect.appendChild(option);
+       }
+
+       function searchLocationsNear(center) {
+         clearLocations();
+
+         var radius = document.getElementById('radiusSelect').value;
+         var searchUrl = 'charlocator.php?lat=' + center.lat() + '&lng=' + center.lng() + '&radius=' + radius;
+         downloadUrl(searchUrl, function(data) {
+           var xml = parseXml(data);
+           var markerNodes = xml.documentElement.getElementsByTagName("marker");
+           var bounds = new google.maps.LatLngBounds();
+           for (var i = 0; i < markerNodes.length; i++) {
+             var id = markerNodes[i].getAttribute("id");
+             var name = markerNodes[i].getAttribute("name");
+             var address = markerNodes[i].getAttribute("address");
+             var distance = parseFloat(markerNodes[i].getAttribute("distance"));
+             var latlng = new google.maps.LatLng(
+                  parseFloat(markerNodes[i].getAttribute("lat")),
+                  parseFloat(markerNodes[i].getAttribute("lng")));
+
+             createOption(name, distance, i);
+             createMarker(latlng, name, address);
+             bounds.extend(latlng);
+           }
+           map.fitBounds(bounds);
+           locationSelect.style.visibility = "visible";
+           locationSelect.onchange = function() {
+             var markerNum = locationSelect.options[locationSelect.selectedIndex].value;
+             google.maps.event.trigger(markers[markerNum], 'click');
+           };
+         });
+       }
+
+       function createMarker(latlng, name, address) {
+          var html = "<b>" + name + "</b> <br/>" + address;
+          var marker = new google.maps.Marker({
+            map: map,
+            position: latlng
+          });
+          google.maps.event.addListener(marker, 'click', function() {
+            infoWindow.setContent(html);
+            infoWindow.open(map, marker);
+          });
+          markers.push(marker);
+        }
+
+       function createOption(name, distance, num) {
+          var option = document.createElement("option");
+          option.value = num;
+          option.innerHTML = name;
+          locationSelect.appendChild(option);
+       }
+
+       function downloadUrl(url, callback) {
+          var request = window.ActiveXObject ?
+              new ActiveXObject('Microsoft.XMLHTTP') :
+              new XMLHttpRequest;
+
+          request.onreadystatechange = function() {
+            if (request.readyState == 4) {
+              request.onreadystatechange = doNothing;
+              callback(request.responseText, request.status);
+            }
+          };
+
+          request.open('GET', url, true);
+          request.send(null);
+       }
+
+       function parseXml(str) {
+          if (window.ActiveXObject) {
+            var doc = new ActiveXObject('Microsoft.XMLDOM');
+            doc.loadXML(str);
+            return doc;
+          } else if (window.DOMParser) {
+            return (new DOMParser).parseFromString(str, 'text/xml');
+          }
+       }
+
+       function doNothing() {}
+  </script>
+    <script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXRt8gPgUVPTYBGpTTBAsaIcunwqGTRa8&callback=initMap">
+
 </script>
-
-<script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXRt8gPgUVPTYBGpTTBAsaIcunwqGTRa8&callback=myMap">
-</script>
-
-   </body>
-
+  </body>
 </html>

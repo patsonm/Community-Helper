@@ -2,8 +2,8 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="/public/styles.css" />
-    <title></title>
+    <link rel="stylesheet" href="styles.css" />
+    <title>Create Organization Account</title>
   </head>
   <body>
     <?
@@ -25,11 +25,18 @@
     $db_selected = mysql_select_db(DB_name,$link);
     ?>
 
-    <div class="topnav navpad">
-      <a href="http://flip3.engr.oregonstate.edu:7855/">Home</a>
-      <a href="http://flip3.engr.oregonstate.edu:7855/guitars">Guitars</a>
-      <a href="http://flip3.engr.oregonstate.edu:7855/songs">Songs</a>
-      <a class="active" href=http://flip3.engr.oregonstate.edu:7855/chords>Chords</a>
+    <div class="wrapper">
+      <header>
+        <img src="images/logo.jpg"/>
+        <nav>
+          <ul>
+            <li><a href="landingPage.php">Home</a></li>
+            <li><a href="userInitialForm.php">Donate</a></li>
+            <li><a href="organizationSignUp.php" class="current"> Create Organization Account</a></li>
+            <li><a href="organizationSignIn.phporganizationSignIn.php">Organization Sign-In </a></li>
+          </ul>
+        </nav>
+      </header>
     </div>
 
     <form action="organizationSignUp.php" method="post">
