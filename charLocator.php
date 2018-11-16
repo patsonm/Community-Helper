@@ -38,8 +38,8 @@ while ($row = @mysql_fetch_assoc($result)){
   $newnode->setAttribute("name", $row['name']);
   $newnode->setAttribute("street_name", $row['street_name']);
   $newnode->setAttribute("lat", $row['lattitude']);
-  $newnode->setAttribute("longitude", $row['longitude']);
-  $newnode->setAttribute("lng", $row['distance']);
+  $newnode->setAttribute("lng", $row['longitude']);
+  $newnode->setAttribute("distance", $row['distance']);
 }
 echo $dom->saveXML();
 ?>

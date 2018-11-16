@@ -31,8 +31,7 @@
           <div class="box">
             <p>With this website if you see a homeless person that you would like to help, you can mark the location, select the need,
             donate money to a nearby non-profit organization, and receive updates on your donation.  Your support makes a difference
-            to change lives so please donate now.
-            </p>
+            to change lives so please donate now.</p>
             <a href="userInitialForm.php" class="donateHere">Donate Here</a>
           </div>
       </div>
