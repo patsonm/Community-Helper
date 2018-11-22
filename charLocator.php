@@ -9,7 +9,7 @@ $dom = new DOMDocument("1.0");
 $node = $dom->createElement("markers");
 $parnode = $dom->appendChild($node);
 // Opens a connection to a mySQL server
-$connection=mysql_connect (localhost, $username, $password);
+$connection=mysql_connect ($hostname, $username, $password);
 if (!$connection) {
   die("Not connected : " . mysql_error());
 }
@@ -19,7 +19,7 @@ if (!$db_selected) {
   die ("Can\'t use db : " . mysql_error());
 }
 // Search the rows in the markers table
-$query = sprintf("SELECT id, name, street_name, lattitude, longitude, ( 3959 * acos( cos( radians('%s') ) * cos( radians( lat ) ) * cos( radians( lng ) - radians('%s') ) + sin( radians('%s') ) * sin( radians( lat ) ) ) ) AS distance FROM organizations HAVING distance < '%s' ORDER BY distance LIMIT 0 , 20",
+$query = sprintf("SELECT id, name, street_name, lattitude, longitude, ( 3959 * acos( cos( radians('%s') ) * cos( radians( lattitude ) ) * cos( radians( longitude ) - radians('%s') ) + sin( radians('%s') ) * sin( radians( lattitude ) ) ) ) AS distance FROM organizations HAVING distance < '%s' ORDER BY distance LIMIT 0 , 20",
   mysql_real_escape_string($center_lat),
   mysql_real_escape_string($center_lng),
   mysql_real_escape_string($center_lat),

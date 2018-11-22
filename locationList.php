@@ -100,7 +100,7 @@
            for (var i = 0; i < markerNodes.length; i++) {
              var id = markerNodes[i].getAttribute("id");
              var name = markerNodes[i].getAttribute("name");
-             var address = markerNodes[i].getAttribute("address");
+             var address = markerNodes[i].getAttribute("street_name");
              var distance = parseFloat(markerNodes[i].getAttribute("distance"));
              var latlng = new google.maps.LatLng(
                   parseFloat(markerNodes[i].getAttribute("lat")),

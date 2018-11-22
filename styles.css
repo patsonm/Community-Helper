@@ -23,8 +23,8 @@ nav ul {
 nav li {
   display: inline;
   margin-right: 40px;}
-nav li a {
-  color: #ffffff;}
+nav li a{
+  color: #667943;}
 nav li a:hover, nav li a.current {
   color: #000000;}
 

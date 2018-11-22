@@ -1,3 +1,7 @@
+<?php
+	include_once 'phpsqlsearch_dbinfo.php'
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -7,27 +11,22 @@
   </head>
   <body>
     <?
-    //Connection Constants
-    define('DB_name', 'name');
-    define('DB_user', 'user');
-    define('DB_password', 'password');
-    define('DB_host', 'host');
 
-    //Connect
-    $link = mysql_connect(DB_host,DB_user,DB_password,DB_name);
+	//Connect to database
+    $link = mysql_connect($hostname, $username, $password);
 
     //If connection fails
     if(!$link){
         die("Connection Error:".mysql_error());
     }
 
-    //Connect to database
-    $db_selected = mysql_select_db(DB_name,$link);
+	$db_selected = mysql_select_db($database,$link);
+
     ?>
 
     <div class="wrapper">
       <header>
-        <img src="logo.jpg"/>
+        <img src="rsz_cmlogo.jpg"/>
         <nav>
           <ul>
             <li><a href="landingPage.php">Home</a></li>
@@ -67,7 +66,7 @@
 
              //Code from https://stackoverflow.com/questions/8022353/how-to-populate-html-dropdown-list-with-values-from-database
 
-             $conn = new mysqli(DB_host, DB_user, DB_password, DB_name)
+             $conn = new mysqli($hostname, $username, $password, $database)
              or die ('Cannot connect to db');
 
              $result = $conn->query("select id, name from categories");
