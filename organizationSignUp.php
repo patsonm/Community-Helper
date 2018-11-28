@@ -173,7 +173,7 @@
         $address = $_POST[street_name]." ".$_POST[city].",".$_POST[state];
         $prepAddr = str_replace(' ','+',$address);
         echo $prepAddr;
-        
+
         $jsonUrlString = "http://www.mapquestapi.com/geocoding/v1/address?key=YOdzbougFT5iQzEUfjOIhd5CaStxmXI3&location=".$prepAddr;
         $jsonurl = file_get_contents($jsonUrlString);
         $output = json_decode($jsonurl, true);
@@ -205,7 +205,7 @@
         }
       }
     ?>
-   
+
 
 
   </body>

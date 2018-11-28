@@ -124,10 +124,10 @@
       </div>
       <!--Your Latitude -->
        <input type ="hidden" name="latitude" id="latitude" value="47.607055">
-      <!--<br> 
+      <!--<br>
       Your longitude-->
         <input type="hidden" name="longitude" id="longitude" value="-122.329033">
-      <!--<br> --> 
+      <!--<br> -->
       <div class="row">
         <input type ="submit" name="Submit"><br>
       </div>
@@ -190,7 +190,7 @@
         else{
           $ticketCreated = "Ticket Created";
           echo $ticketCreated;
-  		
+
         }
 
       }
@@ -217,7 +217,7 @@
       </form>
     </div>
 
-    
+
 
   </body>
 </html>

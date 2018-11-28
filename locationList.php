@@ -43,10 +43,10 @@
       background-color:#9ACD32;
       color: white;
       border-radius: 4px;
-      cursor: pointer;      
+      cursor: pointer;
     }
     input[type=submit]:hover {
-      background-color: #45a049;     
+      background-color: #45a049;
     }
 
  </style>
@@ -134,13 +134,15 @@
              var id = markerNodes[i].getAttribute("id");
              var name = markerNodes[i].getAttribute("name");
              var address = markerNodes[i].getAttribute("street_name");
+             var phone = markerNodes[i].getAttribute("phone");
+             var description = markerNodes[i].getAttribute("description");
              var distance = parseFloat(markerNodes[i].getAttribute("distance"));
              var latlng = new google.maps.LatLng(
                   parseFloat(markerNodes[i].getAttribute("lat")),
                   parseFloat(markerNodes[i].getAttribute("lng")));
 
              createOption(name, distance, i);
-             createMarker(latlng, name, address);
+             createMarker(latlng, name, address, phone, description, distance);
              bounds.extend(latlng);
            }
            map.fitBounds(bounds);
@@ -152,14 +154,19 @@
          });
        }
 
-       function createMarker(latlng, name, address) {
-          var html = "<b>" + name + "</b> <br/>" + address;
+       function createMarker(latlng, name, address, phone, description, distance) {
           var marker = new google.maps.Marker({
             map: map,
             position: latlng
           });
+
+          var res = '<a href="tel:' + phone + '">'+phone+ '</a>';
           google.maps.event.addListener(marker, 'click', function() {
-            infoWindow.setContent(html);
+            infoWindow.setContent('<div><strong>' + name + '</strong><br>' +
+              'Address: ' + address+ '<br>' +
+              'Distance from you in miles: ' + distance+ '<br>' +
+              'Description: ' + description+ '<br>' +
+              'Phone Number: ' + res + '</div>');
             infoWindow.open(map, marker);
           });
           markers.push(marker);
@@ -199,7 +206,7 @@
        }
 
        function doNothing() {}
-  
+
   </script>
     <script async defer
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXRt8gPgUVPTYBGpTTBAsaIcunwqGTRa8&callback=initMap">
@@ -224,7 +231,7 @@
     <form action = "locationList.php" method = "post">
           <label for="selectOrganization">Please Select Organization To Donate To:</label>
           <?php
-            
+
             //Get needType value from sumbitted form in userInitialForm.php and append to query
             /*$query = "select DISTINCT organizations.id, organizations.name from organizations INNER JOIN organizations_categories ON organizations.id = organizations_categories.organizationID INNER JOIN categories ON organizations_categories.categoryID = categories.id INNER JOIN ticket ON categories.name = ticket.needType WHERE ticket.needType =".$outputNeedType;
 
@@ -251,10 +258,11 @@
 
              $conn = new mysqli($hostname, $username, $password, $database)
              or die ('Cannot connect to db');
-
-             $result = $conn->query("select id, name from organizations");
+             $queryToSend = "SELECT DISTINCT organizations.id, organizations.name FROM organizations INNER JOIN organizations_categories ON organizations.id = organizations_categories.organizationID INNER JOIN categories ON organizations_categories.categoryID = categories.id INNER JOIN ticket ON categories.name = ticket.needType WHERE ticket.needType = '$outputNeedType'";
+             $result = $conn->query($queryToSend);
 
              echo "<select name='name'>";
+             echo $queryToSend;
 
              while ($row = $result->fetch_assoc()) {
 
@@ -264,12 +272,12 @@
                  echo '<option value="'.$name.'">'.$name.'</option>';
              }
                  echo "</select>";
-        
+
 
           ?>
-      
+
         <input type ="submit" name="Submit"><br>
-      
+
     </form>
   </div>
 
@@ -284,7 +292,7 @@
           }
           else{
             $postConfirmed = "Confirmed";
-        
+
             $result = mysql_query("SELECT `website` FROM organizations WHERE `name`='$_POST[name]'");
             //Get website address
             $webAddress = mysql_result($result,0);

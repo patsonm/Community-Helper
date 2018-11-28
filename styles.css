@@ -1,4 +1,4 @@
-
+<--Landing Page-->
 body{
   color: #666666;
   background-color: #f9f8f6;
@@ -8,6 +8,11 @@ body{
 header{
   margin: 10px 0px 10px 0px;
   background-color: #f9f8f6;
+}
+
+footer{
+  background-color: #f9f8f6;
+  text-align: center;
 }
 
 <--navbar-->
@@ -28,6 +33,7 @@ nav li a{
 nav li a:hover, nav li a.current {
   color: #000000;}
 
+<--Landing Page Divs-->
 .parallax{
   /*find image*/
   background-image: url(donate.jpg);
@@ -56,6 +62,8 @@ nav li a:hover, nav li a.current {
   width: 500px;
   margin: 5px;
 }
+
+<--Landing Page Button-->
 .donateHere{
   -moz-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
   -webkit-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
@@ -100,6 +108,45 @@ nav li a:hover, nav li a.current {
 .donateHere:active {
   position:relative;
   top:1px;
+}
+<--Organization SignIn-->
+button{
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+button:hover{
+  opacity:0.8;
+}
+.SignIn{
+  padding: 16px;
+}
+form{
+  border: 3px solid #f1f1f1;
+}
+span.psw{
+  float: right;
+  padding-top: 16px;
+}
+input[type=password]{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+#signIncontainer{
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items:center;
+  height: 450px;
+  border: 1px solid black;
 }
 
 *{
@@ -181,5 +228,10 @@ input[type=submit]:hover {
     .col-25, .col-75, input[type=submit] {
         width: 100%;
         margin-top: 0;
+    }
+    /*change styles for span on Sign-In password*/
+    span.psw{
+      display:block;
+      float:none;
     }
 }

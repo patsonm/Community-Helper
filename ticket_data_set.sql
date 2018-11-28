@@ -22,6 +22,7 @@ CREATE TABLE `ticket_status`(
 	`organizationID` int NOT NULL,
 	`ticketID` int NOT NULL,
 	`status` varchar(255) NOT NULL DEFAULT 'pending',
+	`useDescription` varchar(255) NOT NULL DEFAULT 'pending';
 	`emailSent` varchar(255) NOT NULL DEFAULT 'not sent',
 	PRIMARY KEY (`id`),
 	FOREIGN KEY (`organizationID`) REFERENCES `organizations` (`id`) ON DELETE CASCADE,

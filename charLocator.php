@@ -19,7 +19,7 @@ if (!$db_selected) {
   die ("Can\'t use db : " . mysql_error());
 }
 // Search the rows in the markers table
-$query = sprintf("SELECT id, name, street_name, lattitude, longitude, ( 3959 * acos( cos( radians('%s') ) * cos( radians( lattitude ) ) * cos( radians( longitude ) - radians('%s') ) + sin( radians('%s') ) * sin( radians( lattitude ) ) ) ) AS distance FROM organizations HAVING distance < '%s' ORDER BY distance LIMIT 0 , 20",
+$query = sprintf("SELECT id, name, street_name, phone, description, lattitude, longitude, ( 3959 * acos( cos( radians('%s') ) * cos( radians( lattitude ) ) * cos( radians( longitude ) - radians('%s') ) + sin( radians('%s') ) * sin( radians( lattitude ) ) ) ) AS distance FROM organizations HAVING distance < '%s' ORDER BY distance LIMIT 0 , 20",
   mysql_real_escape_string($center_lat),
   mysql_real_escape_string($center_lng),
   mysql_real_escape_string($center_lat),
@@ -37,6 +37,8 @@ while ($row = @mysql_fetch_assoc($result)){
   $newnode->setAttribute("id", $row['id']);
   $newnode->setAttribute("name", $row['name']);
   $newnode->setAttribute("street_name", $row['street_name']);
+  $newnode->setAttribute("phone", $row['phone']);
+  $newnode->setAttribute("description", $row['description']);
   $newnode->setAttribute("lat", $row['lattitude']);
   $newnode->setAttribute("lng", $row['longitude']);
   $newnode->setAttribute("distance", $row['distance']);
