@@ -3,11 +3,14 @@
 ?>
 
 <!DOCTYPE html>
-<html>
-<head>
-	<link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
+<html lang="en" dir="ltr">
+	<head>
+			<meta charset="utf-8"/>
+			<link rel="stylesheet" href="styles.css" type="text/css"/>
+			<title> Organization Landing Page </title>
+	</head>
+	<body>
+
   <?php
     $organizationID = $_GET['id'];
     //Connect to database
@@ -20,11 +23,27 @@
 
     $db_selected = mysql_select_db($database,$link);
   ?>
-  
-  <h1>Organization's Tickets</h1>
-    <table>
+
+    <div class="wrapper">
+      <header>
+        <img src="rsz_cmlogo.jpg"/>
+        <nav>
+          <ul>
+            <li><a href="landingPage.php">Home</a></li>
+						<?php
+						echo "<li><a href = 'organizationEdit.php?organizationID=".$organizationID."'>Edit Account</a></li>";
+						?>
+          </ul>
+        </nav>
+      </header>
+		</div>
+
+		<div class= "ticketbox">
+				<h1>Organization's Tickets</h1>
+
+    <table id="tickets">
       <tr>
-        <th>Ticket Number</th>
+        <th>Ticket ID</th>
         <th>Donor First Name</th>
         <th>Donor Last Name</th>
         <th>Donor Email</th>
@@ -33,8 +52,8 @@
         <th>Lattitude</th>
         <th>Longitude</th>
         <th>Donation Use</th>
-        <th>Ticket Status</th>
-        <th>Email Status</th>
+        <th>Donation Confirmed?</th>
+        <th>Email Sent?</th>
         <th>Edit</th>
       </tr>
   <?php
@@ -52,7 +71,7 @@
 
     while($row = mysqli_fetch_assoc($result)){
       echo "<tr>";
-      echo "<td>".$row['ticketID']."</td>";
+      echo "<td>".$row['id']."</td>";
       echo "<td>".$row['firstName']."</td>";
       echo "<td>".$row['lastName']."</td>";
       echo "<td>".$row['email']."</td>";
@@ -63,9 +82,16 @@
       echo "<td>".$row['useDescription']."</td>";
       echo "<td>".$row['status']."</td>";
       echo "<td>".$row['emailSent']."</td>";
-      echo "<td><a href = 'ticketEdit.php?ticketNumber=".$row['id']."'>Edit</a></td>";
+      echo "<td><a href = 'ticketEdit.php?ticketNumber=".$row['id']."&organizationID=".$organizationID."'>Edit</a></td>";
       echo "</tr>";
     }
 
    ?>
  </table>
+
+		</div>
+		<footer>
+			<h3>Group 26 Project</h3>
+		</footer>
+	</body>
+</html>

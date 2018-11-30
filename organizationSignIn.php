@@ -11,7 +11,7 @@
 </head>
 <body>
 	<?php
-		$organizationID = $_GET['organizationID'];
+
 		//Connect to database
 		$link = mysql_connect($hostname, $username, $password);
 
@@ -39,15 +39,15 @@
 
 			<div id="signIncontainer">
 				<div class="box">
-					<h2>Organization Login</h2>
+					<h2>Organization Sign-In</h2>
 				</div>
 
 				<form action="organizationSignIn.php" method="post">
 					<div class="SignIn">
-						<label for="phone"><b>Phone Number</b></label>
-						<input type="int" placeholder="Enter Phone Number" name="phone" required>
+						<label for="phone"><b>Phone Number</b></label><br>
+						<input type="int" placeholder="Enter Phone Number" name="phone" required><br>
 
-						<label for="psw"><b>Password</b></label>
+						<label for="psw"><b>Password</label></b>
 						<input type="password" placeholder="Enter Password" name="psw" required>
 
 						<button type="submit" name="submit"> Login</button>
@@ -56,26 +56,29 @@
 			</div>
 		</div>
 <?php
-	$conn = new mysqli($hostname, $username, $password, $database)
-		or die('Cannot connect to database');
-		if(isset($_POST['submit'])){
-			$sql= "SELECT id
-				 	 	 FROM organizations
-					 	 WHERE email = '$_POST[phone]' AND password = '$_POST[psw]'";
 
-			if(mysqli_query($conn,$sql)){
-				echo "<a href = 'organizationLanding.php?id="      "'>Go to Organization Homepage</a>";
+		if(isset($_POST['submit'])){
+			$result = mysql_query("SELECT `id`
+				 	FROM `organizations`
+					WHERE `phone` = '$_POST[phone]' AND `password` = '$_POST[psw]'");
+
+			$row = mysql_fetch_array($result);
+
+			if($row['id'] > 0){
+				echo "<a href= 'organizationLanding.php?id=".$row['id']."'>Go to Organization Homepage</a>";
 			}
+
 			else {
 				echo "Inncorrect Email and/or Password";
 			}
 		}
+
  ?>
 
 
 		<footer>
 			<h3>Group 26 Project</h3>
 		</footer>
-	</div>
+
 </body>
 </html>

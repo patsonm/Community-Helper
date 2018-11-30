@@ -31,7 +31,7 @@
           <ul>
             <li><a href="landingPage.php">Home</a></li>
             <li><a href="organizationSignUp.php" class="current"> Create Organization Account</a></li>
-            <li><a href="organizationSignIn.phporganizationSignIn.php">Organization Sign-In </a></li>
+            <li><a href="organizationSignIn.php">Organization Sign-In </a></li>
           </ul>
         </nav>
       </header>

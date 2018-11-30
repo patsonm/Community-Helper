@@ -1,4 +1,4 @@
-<--Landing Page-->
+/*--Landing Page--*/
 body{
   color: #666666;
   background-color: #f9f8f6;
@@ -15,7 +15,7 @@ footer{
   text-align: center;
 }
 
-<--navbar-->
+/*--navbar--*/
 nav{
   clear: both;
   color: #ffffff;
@@ -33,7 +33,7 @@ nav li a{
 nav li a:hover, nav li a.current {
   color: #000000;}
 
-<--Landing Page Divs-->
+/*--Landing Page Divs--*/
 .parallax{
   /*find image*/
   background-image: url(donate.jpg);
@@ -44,6 +44,7 @@ nav li a:hover, nav li a.current {
   background-repeat: no-repeat;
   background-size: contain;
 }
+
 .wrapper{
   padding:20px;
   text-align: center;
@@ -63,53 +64,29 @@ nav li a:hover, nav li a.current {
   margin: 5px;
 }
 
-<--Landing Page Button-->
-.donateHere{
-  -moz-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
-  -webkit-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
-  box-shadow:inset 0px 1px 0px 0px #bbdaf7;
-  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #79bbff), color-stop(1, #378de5) );
-  background:-moz-linear-gradient( center top, #79bbff 5%, #378de5 100% );
-  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#79bbff', endColorstr='#378de5');
-  background-color:#79bbff;
-  -webkit-border-top-left-radius:0px;
-  -moz-border-radius-topleft:0px;
-  border-top-left-radius:0px;
-  -webkit-border-top-right-radius:0px;
-  -moz-border-radius-topright:0px;
-  border-top-right-radius:0px;
-  -webkit-border-bottom-right-radius:0px;
-  -moz-border-radius-bottomright:0px;
-  border-bottom-right-radius:0px;
-  -webkit-border-bottom-left-radius:0px;
-  -moz-border-radius-bottomleft:0px;
-  border-bottom-left-radius:0px;
-  text-indent:0px;
-  border:1px solid #84bbf3;
-  display:inline-block;
-  color:#ffffff;
-  font-family:Arial;
-  font-size:18px;
-  font-weight:bold;
-  font-style:normal;
-  height:51px;
-  line-height:51px;
-  width:115px;
-  text-decoration:none;
-  text-align:center;
-  text-shadow:1px 1px 0px #528ecc;
+/*--Landing Page Button--*/
+input.donateHere{
+  background-color: white;
+  border: 2px solid #4CAF50;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  padding: 10px 24px;
+
 }
-.donateHere:hover {
-  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #378de5), color-stop(1, #79bbff) );
-  background:-moz-linear-gradient( center top, #378de5 5%, #79bbff 100% );
-  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#378de5', endColorstr='#79bbff');
-  background-color:#378de5;
+input.donateHere:hover {
+  background-color: #4CAF50;
+  color: white;
 }
-.donateHere:active {
+input.donateHere:active {
   position:relative;
   top:1px;
 }
-<--Organization SignIn-->
+/*--Organization SignIn--*/
 button{
   background-color: #4CAF50;
   color: white;
@@ -123,23 +100,21 @@ button:hover{
   opacity:0.8;
 }
 .SignIn{
-  padding: 16px;
+  padding: 20px;
 }
 form{
   border: 3px solid #f1f1f1;
 }
-span.psw{
-  float: right;
-  padding-top: 16px;
-}
+
 input[type=password]{
   width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
+  padding: 12px;
   border: 1px solid #ccc;
+  border-radius: 4px;
   box-sizing: border-box;
+  resize: vertical;
 }
+
 #signIncontainer{
   display:flex;
   flex-direction:column;
@@ -152,7 +127,7 @@ input[type=password]{
 *{
   box-sizing: border-box;
 }
-input[type=text], input[type=email], input[type=number], select, textarea {
+input[type=text], input[type=email], input[type=number], input[type=int], select, textarea {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
@@ -229,9 +204,35 @@ input[type=submit]:hover {
         width: 100%;
         margin-top: 0;
     }
-    /*change styles for span on Sign-In password*/
-    span.psw{
-      display:block;
-      float:none;
-    }
+}
+/*--Organization Landing Page--*/
+#tickets{
+  font-family:Georgia, Times, serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#tickets td, #tickets th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#tickets tr:nth-child(even){background-color: #f2f2f2;}
+
+#tickets tr:hover {background-color: #ddd;}
+
+#tickets th{
+  padding-top: 12px;
+  padding-bottom:12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+.ticketbox{
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items:center;
+  height: 500px;
+  border: 1px solid black;
 }

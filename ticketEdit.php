@@ -13,6 +13,8 @@
     <?php
 
 		$ticketNumber = $_GET['ticketNumber'];
+    $organizationID = $_GET['organizationID'];
+
 
 	   //Connect to database
       $link = mysql_connect($hostname, $username, $password);
@@ -33,6 +35,9 @@
           <ul>
             <li><a href="landingPage.php">Home</a></li>
             <li><a href="userInitialForm.php" class="current">Donate</a></li>
+            <?php
+            echo "<li><a href = 'organizationLanding.php?id=".$organizationID."'>Organization Home</a></li>";
+            ?>
           </ul>
         </nav>
       </header>
@@ -40,7 +45,9 @@
 
     <!-- Form adapted from https://www.w3schools.com/howto/howto_css_responsive_form.asp -->
     <div class="containerForm">
-      <form action = "ticketEdit.php" method = "post">
+      <?php
+        echo "<form action = 'ticketEdit.php?ticketNumber=".$ticketNumber."&organizationID=".$organizationID."' method = 'post' >";
+      ?>
         <div class="row">
           <div class="col-25">
             <label for="Status">Status:</label>
@@ -79,27 +86,60 @@
 
     <?php
       if(isset($_POST['Submit'])){
-        $query= "UPDATE `ticket_status` SET `status`='$_POST[status]', `useDescription`='$_POST[descriptionUse]', `emailSent`='$_POST[emailSent]' WHERE id = $ticketNumber";
 
-        //If query fails
-        if(!mysql_query($query)){
-          die('Error:'.mysql_error());
-        }
-        else{
-          $ticketUpdated = "Ticket Updated";
-          echo $ticketUpdated;
-        }
+				if(isset($_POST['status'])){
+					$query1= "UPDATE `ticket_status`
+	                SET `status`='$_POST[status]'
+	                WHERE `id` = '$ticketNumber' ";
+					$result1 = mysql_query($query1);
 
-      }
+					//If query fails
+					if(!result1){
+						die('Error:'.mysql_error());
+					}
+					else{
+						$ticketUpdated = "Ticket Updated";
+						echo $ticketUpdated;
+					}
+				}
+
+				if(isset($_POST['descriptionUse'])){
+					$descriptionCheck = $_POST['descriptionUse'];
+					if($descriptionCheck != ""){
+		        $query2= "UPDATE `ticket_status`
+		                SET  `useDescription`='$_POST[descriptionUse]'
+		                WHERE `id` = '$ticketNumber' ";
+						$result2 = mysql_query($query2);
+
+						//If query fails
+						if(!result2){
+							die('Error:'.mysql_error());
+						}
+						else{
+							$ticketUpdated = "Ticket Updated";
+							echo $ticketUpdated;
+						}
+				}
+}
+				if(isset($_POST['emailSent'])){
+					$query3= "UPDATE `ticket_status`
+									SET `emailSent`='$_POST[emailSent]'
+									WHERE `id` = '$ticketNumber' ";
+					$result3 = mysql_query($query3);
+
+					//If query fails
+					if(!result3){
+						die('Error:'.mysql_error());
+					}
+					else{
+						$ticketUpdated = "Ticket Updated";
+						echo $ticketUpdated;
+					}
+				}
+
+}
+
     ?>
 
-    <!--redirect to organizationLanding.php -->
-    <script type="text/javascript">
-      var posted = "<?php echo $ticketUpdated ?>";
-      if(posted === "Ticket Updated"){
-        location.href = 'organizationLanding.php';
-
-      }
-    </script>
   </body>
 </html>

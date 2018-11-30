@@ -32,7 +32,7 @@
             <p>With this website if you see a homeless person that you would like to help, you can mark the location, select the need,
             donate money to a nearby non-profit organization, and receive updates on your donation.  Your support makes a difference
             to change lives so please donate now.</p>
-            <a href="userInitialForm.php" class="donateHere">Donate Here</a>
+            <input class="donateHere" type="button" value="Donate Here" onclick="window.location.href='http://web.engr.oregonstate.edu/~smitfran/userInitialForm.php'"/>
           </div>
       </div>
 
