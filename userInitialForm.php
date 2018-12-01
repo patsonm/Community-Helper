@@ -46,7 +46,7 @@
           <label for="firstName">First Name:</label>
         </div>
         <div class="col-75">
-          <input type = "text" id="firstName" name="firstName">
+          <input type = "text" id="firstName" name="firstName" required>
         </div>
       </div>
       <div class="row">
@@ -54,7 +54,7 @@
           <label for="lastName">Last Name:</label>
         </div>
         <div class="col-75">
-          <input type = "text" id="lastName" name="lastName">
+          <input type = "text" id="lastName" name="lastName" required>
         </div>
       </div>
       <div class="row">
@@ -70,7 +70,7 @@
           <label for="need">Please Describe Need:</label>
         </div>
         <div class="col-75">
-          <input type = "text" id="need" name="need">
+          <input type = "text" id="need" name="need" required>
         </div>
       </div>
       <div class="row">

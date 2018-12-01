@@ -161,6 +161,14 @@
           </div>
         </div>
         <div class="row">
+          <div class="col-25">
+            <label for="website">Password:</label>
+          </div>
+          <div class="col-75">
+            <input type="text" id="password" name= "password" required>
+          </div>
+        </div>
+        <div class="row">
           <input type="submit" name="submit">
         </div>
       </form>
@@ -181,8 +189,8 @@
         $longitude=$output['results'][0]['locations'][0]['latLng']['lng'];
         echo "Lat: ".$lattitude."Long: ".$longitude." ";
 
-        $query= "INSERT INTO `organizations` (`name`,`street_name`,`suite`,`city`,`state`,`zip`,`website`,`contact_name`,`email`,`phone`,`description`, `lattitude`,`longitude`)
-                  VALUES ('$_POST[name]', '$_POST[street_name]', '$_POST[suite]', '$_POST[city]', '$_POST[state]', '$_POST[zip]', '$_POST[website]', '$_POST[contact_name]', '$_POST[email]', '$_POST[phone]', '$_POST[description]', '$lattitude', '$longitude')";
+        $query= "INSERT INTO `organizations` (`name`,`street_name`,`suite`,`city`,`state`,`zip`,`website`,`contact_name`,`email`,`phone`,`description`, `lattitude`,`longitude`, `password`)
+                  VALUES ('$_POST[name]', '$_POST[street_name]', '$_POST[suite]', '$_POST[city]', '$_POST[state]', '$_POST[zip]', '$_POST[website]', '$_POST[contact_name]', '$_POST[email]', '$_POST[phone]', '$_POST[description]', '$lattitude', '$longitude', '$_POST[password]')";
 
         //If query fails
         if(!mysql_query($query)){
