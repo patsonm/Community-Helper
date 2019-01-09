@@ -1,90 +1,196 @@
+<?php
+	include_once 'phpsqlsearch_dbinfo.php'
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="/public/styles.css" />
-    <title></title>
+    <link rel="stylesheet" href="styles.css" />
+    <title>Create Organization Account</title>
   </head>
   <body>
-    <?
-    //Connection Constants
-    define('DB_name', 'cs361_dunnbrit');
-    define('DB_user', 'cs361_dunnbrit');
-    define('DB_password', '1967');
-    define('DB_host', 'classmysql.engr.oregonstate.edu');
+    <?php
 
-    //Connect
-    $link = mysql_connect(DB_host,DB_user,DB_password,DB_name);
+	//Connect to database
+    $link = mysql_connect($hostname, $username, $password);
 
     //If connection fails
     if(!$link){
         die("Connection Error:".mysql_error());
     }
 
-    //Connect to database
-    $db_selected = mysql_select_db(DB_name,$link);
+	$db_selected = mysql_select_db($database,$link);
+
     ?>
 
-    <div class="topnav navpad">
-      <a href="http://flip3.engr.oregonstate.edu:7855/">Home</a>
-      <a href="http://flip3.engr.oregonstate.edu:7855/guitars">Guitars</a>
-      <a href="http://flip3.engr.oregonstate.edu:7855/songs">Songs</a>
-      <a class="active" href=http://flip3.engr.oregonstate.edu:7855/chords>Chords</a>
+    <div class="wrapper">
+      <header>
+        <img src="rsz_cmlogo.jpg"/>
+        <nav>
+          <ul>
+            <li><a href="landingPage.php">Home</a></li>
+            <li><a href="organizationSignUp.php" class="current"> Create Organization Account</a></li>
+            <li><a href="organizationSignIn.php">Organization Sign-In </a></li>
+          </ul>
+        </nav>
+      </header>
     </div>
 
-    <form action="organizationSignUp.php" method="post">
-      <fieldset>
-        <legend>Organization Information</legend>
-        Name:<input type="text" name="name">
-        <br>
-        Location:<br>
-        Street: <input type="text" name= "street_name">
-        Suite:<input type="text" name= "suite">
-        <br>
-        City:<input type="text" name= "city">
-        State:<input type="text" name= "state">
-        Zip:<input type="text" name="zip">
-        <br>
-        Website:<input type="text" name= "website">
-        <br>
-        Main Contact Name:<input type="text" name="contact_name">
-        <br>
-        Email:<input type="email" name= "email">
-        <br>
-        Phone:<input type="number" name= "phone">
-        <br>
-        Organzation Description:<input type="text" name="description">
-        <br>
-        Category of Service Provided:
-        <?php
+    <!-- Form adapted from https://www.w3schools.com/howto/howto_css_responsive_form.asp -->
+    <div class="containerForm">
+      <div class="serviceArea">
+        <h3>We Currently Only Serve Seattle, WA Area</h3>
+      </div>
+      <form action="organizationSignUp.php" method="post">
+        <div class="row">
+          <div class="col-25">
+            <label for="name">Name:</label>
+          </div>
+          <div class="col-75">
+            <input type="text" id="name" name="name" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="street_name">Steet:</label>
+          </div>
+          <div class="col-75">
+            <input type="text" id="street_name" name= "street_name" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="suite">Suite:</label>
+          </div>
+          <div class="col-75">
+            <input type="text" id="suite" name= "suite">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="city">City:</label>
+          </div>
+          <div class="col-75">
+            <input type="text" id="city" name= "city" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="state">State:</label>
+          </div>
+          <div class="col-75">
+            <input type="text" id="state" name= "state" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="zip">Zip:</label>
+          </div>
+          <div class="col-75">
+            <input type="text" id="zip" name="zip" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="website">Website:</label>
+          </div>
+          <div class="col-75">
+            <input type="text" id="website" name= "website" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="contact_name">Main Contact Name:</label>
+          </div>
+          <div class="col-75">
+            <input type="text" id="contact_name" name="contact_name">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="email">Email:</label>
+          </div>
+          <div class="col-75">
+            <input type="email" name= "email">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="phone">Phone:</label>
+          </div>
+          <div class="col-75">
+            <input type="number" id="phone" name= "phone" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="description">Organization Description:</label>
+          </div>
+          <div class="col-75">
+            <input type="text" id="description" name="description" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="categoryID">Category of Service Provided:</label>
+          </div>
+          <div class="col-75">
+            <?php
 
-             //Code from https://stackoverflow.com/questions/8022353/how-to-populate-html-dropdown-list-with-values-from-database
+               //Code from https://stackoverflow.com/questions/8022353/how-to-populate-html-dropdown-list-with-values-from-database
 
-             $conn = new mysqli(DB_host, DB_user, DB_password, DB_name)
-             or die ('Cannot connect to db');
+               $conn = new mysqli($hostname, $username, $password, $database)
+               or die ('Cannot connect to db');
 
-             $result = $conn->query("select id, name from categories");
+               $result = $conn->query("select id, name from categories");
 
-             echo "<select name='categoryID'>";
+               echo "<select name='categoryID'>";
 
-             while ($row = $result->fetch_assoc()) {
+               while ($row = $result->fetch_assoc()) {
 
-                 unset($id, $name);
-                 $id = $row['id'];
-                 $name = $row['name'];
-                 echo '<option value="'.$id.'">'.$name.'</option>';
-             }
+                   unset($id, $name);
+                   $id = $row['id'];
+                   $name = $row['name'];
+                   echo '<option value="'.$id.'">'.$name.'</option>';
+               }
 
-                 echo "</select>";
+                   echo "</select>";
 
-           ?>
-        <input type="submit" name="submit">
-      </fieldset>
-    </form>
-    <?
+            ?>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="website">Password:</label>
+          </div>
+          <div class="col-75">
+            <input type="text" id="password" name= "password" required>
+          </div>
+        </div>
+        <div class="row">
+          <input type="submit" name="submit">
+        </div>
+      </form>
+    </div>
+
+    <?php
+
+
       if(isset($_POST['submit'])){
-        $query= "INSERT INTO `organizations` (`name`,`street_name`,`suite`,`city`,`state`,`zip`,`website`,`contact_name`,`email`,`phone`,`description`)
-                  VALUES ('$_POST[name]', '$_POST[street_name]', '$_POST[suite]', '$_POST[city]', '$_POST[state]', '$_POST[zip]', '$_POST[website]', '$_POST[contact_name]', '$_POST[email]', '$_POST[phone]', '$_POST[description]')";
+        $address = $_POST[street_name]." ".$_POST[city].",".$_POST[state];
+        $prepAddr = str_replace(' ','+',$address);
+        echo $prepAddr;
+
+        $jsonUrlString = "http://www.mapquestapi.com/geocoding/v1/address?key=YOdzbougFT5iQzEUfjOIhd5CaStxmXI3&location=".$prepAddr;
+        $jsonurl = file_get_contents($jsonUrlString);
+        $output = json_decode($jsonurl, true);
+        $lattitude=$output['results'][0]['locations'][0]['latLng']['lat'];
+        $longitude=$output['results'][0]['locations'][0]['latLng']['lng'];
+        echo "Lat: ".$lattitude."Long: ".$longitude." ";
+
+        $query= "INSERT INTO `organizations` (`name`,`street_name`,`suite`,`city`,`state`,`zip`,`website`,`contact_name`,`email`,`phone`,`description`, `lattitude`,`longitude`, `password`)
+                  VALUES ('$_POST[name]', '$_POST[street_name]', '$_POST[suite]', '$_POST[city]', '$_POST[state]', '$_POST[zip]', '$_POST[website]', '$_POST[contact_name]', '$_POST[email]', '$_POST[phone]', '$_POST[description]', '$lattitude', '$longitude', '$_POST[password]')";
 
         //If query fails
         if(!mysql_query($query)){
@@ -95,7 +201,7 @@
         }
       }
     ?>
-    <?
+    <?php
       if(isset($_POST['submit'])){
         if(isset($_POST['categoryID'])){
           $sql = "INSERT INTO `organizations_categories`(`organizationID`,`categoryID`)
@@ -107,5 +213,8 @@
         }
       }
     ?>
+
+
+
   </body>
 </html>

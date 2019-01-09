@@ -1,31 +1,4 @@
-<--navbar-->
-div.topnav {
-  overflow: hidden;
-  background-color: #333;
-}
-
-div.navpad{padding: 50px 50px 50px 50px;width:100%;
-   margin:0 auto;}
-
-.topnav a{
-  float: left;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
-
-.topnav a:hover {
-  background-color: navy;
-  color: white;
-}
-
-.topnav a.active {
-  background-color: indianred;
-  color: white;
-}
-
+/*--Landing Page--*/
 body{
   color: #666666;
   background-color: #f9f8f6;
@@ -33,23 +6,45 @@ body{
   margin: 10px;
 }
 header{
-  height:160px;
+  margin: 10px 0px 10px 0px;
   background-color: #f9f8f6;
 }
-.wrapper{
-  padding:20px;
+
+footer{
+  background-color: #f9f8f6;
   text-align: center;
-  background-color: #fffff;
 }
+
+/*--navbar--*/
+nav{
+  clear: both;
+  color: #ffffff;
+  background-color: #aeaca8;
+  height: 30px;
+}
+nav ul {
+  margin: 0px;
+  padding: 5px 0px 5px 30px;}
+nav li {
+  display: inline;
+  margin-right: 40px;}
+nav li a{
+  color: #667943;}
+nav li a:hover, nav li a.current {
+  color: #000000;}
+
+/*--Landing Page Divs--*/
 .parallax{
   /*find image*/
+  background-image: url(donate.jpg);
   min-height:500px;
   /*create parallax scrolling effect*/
   background-attachment:fixed;
   background-position:center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
 }
+
 .wrapper{
   padding:20px;
   text-align: center;
@@ -67,4 +62,177 @@ header{
   text-align:center;
   width: 500px;
   margin: 5px;
+}
+
+/*--Landing Page Button--*/
+input.donateHere{
+  background-color: white;
+  border: 2px solid #4CAF50;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  padding: 10px 24px;
+
+}
+input.donateHere:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+input.donateHere:active {
+  position:relative;
+  top:1px;
+}
+/*--Organization SignIn--*/
+button{
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+button:hover{
+  opacity:0.8;
+}
+.SignIn{
+  padding: 20px;
+}
+form{
+  border: 3px solid #f1f1f1;
+}
+
+input[type=password]{
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+#signIncontainer{
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items:center;
+  height: 450px;
+  border: 1px solid black;
+}
+
+*{
+  box-sizing: border-box;
+}
+input[type=text], input[type=email], input[type=number], input[type=int], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+
+input[type=submit] {
+    background-color: #9ACD32;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+.containerForm {
+    border-radius: 5px;
+    color:white;
+    background-color: black;
+    padding: 20px;
+}
+
+.col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+}
+
+.col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.serviceArea{
+    background-color:#9ACD32;
+    color:white;
+    text-align:center;
+}
+#mapBtn{
+    background-color: #9ACD32;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}
+#mapBtn{
+    background-color: #45a049;
+}
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .col-25, .col-75, input[type=submit] {
+        width: 100%;
+        margin-top: 0;
+    }
+}
+/*--Organization Landing Page--*/
+#tickets{
+  font-family:Georgia, Times, serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#tickets td, #tickets th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#tickets tr:nth-child(even){background-color: #f2f2f2;}
+
+#tickets tr:hover {background-color: #ddd;}
+
+#tickets th{
+  padding-top: 12px;
+  padding-bottom:12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+.ticketbox{
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items:center;
+  height: 500px;
+  border: 1px solid black;
 }
