@@ -1,4 +1,7 @@
 Community Helper Web Application
 
+Paired Programming App which aims to matching donations to specific people in need.
 
-Contributers: stephenboles, empdierks, dunnbrit, patsonm, FrankCSmith
+Using PHP and Google Maps API
+
+Contributers: empdierks, dunnbrit, patsonm, FrankCSmith
